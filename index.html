@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lengua Mágica 🌈✨</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Arial', sans-serif;
+            touch-action: manipulation;
+        }
+        .mobile-button {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .juego-opcion {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            background-color: #e2e8f0;
+            transition: background-color 0.3s;
+        }
+        .juego-opcion:hover {
+            background-color: #cbd5e1;
+        }
+        .respuesta-opcion {
+            cursor: pointer;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e1;
+            transition: background-color 0.3s;
+        }
+        .respuesta-opcion:hover {
+            background-color: #e2e8f0;
+        }
+        iframe {
+            width: 100%;
+            height: 250px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-6 rounded-xl shadow-2xl w-full max-w-md mx-auto">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold mb-4 text-purple-600 break-words">
+                Lengua Mágica 🌈✨
+            </h1>
+            <p class="mb-6 text-gray-700 text-lg">
+                Aprende español de forma divertida e interactiva
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <button class="mobile-button w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition text-lg active:scale-95 shadow-md" onclick="mostrarFraseDelDia()">
+                📅 Frases del Día
+            </button>
+            <button class="mobile-button w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition text-lg active:scale-95 shadow-md" onclick="mostrarJuegoDeVocabulario()">
+                🧩 Juegos de Vocabulario
+            </button>
+            <button class="mobile-button w-full bg-yellow-500 text-white py-3 rounded-lg hover:bg-yellow-600 transition text-lg active:scale-95 shadow-md" onclick="mostrarPracticaDeConversacion()">
+                💬 Práctica de Conversación
+            </button>
+        </div>
+
+        <div id="info" class="mt-6 text-center text-sm text-gray-700 bg-gray-100 p-4 rounded-lg shadow-inner hidden">
+            <!-- Aquí se mostrará la información dinámica -->
+        </div>
+    </div>
+
+    <script>
+        const frases = [
+            "La práctica hace al maestro.",
+            "Cada día es una nueva oportunidad para aprender.",
+            "El conocimiento es poder.",
+            "La paciencia y la constancia son clave.",
+            "La educación es el arma más poderosa para cambiar el mundo.",
+            "Aprender es un regalo, incluso cuando el dolor es tu maestro.",
+            "Nunca es tarde para aprender algo nuevo.",
+            "Haz de cada día una oportunidad para aprender."
+        ];
+
+        const videos = [
+            "https://www.youtube.com/embed/O0ASaqM3iCQ",
+            "https://www.youtube.com/embed/nF0CnDvRvBQ"
+        ];
+
+        const preguntasConversacion = [
+            {
+                pregunta: "¿Cómo va tu día? 🌈",
+                respuestas: [
+                    "¡Volando como un superhéroe! 🦸‍♀️",
+                    "Más feliz que un emoji con gafas de sol 😎",
+                    "Tan genial que podría ganar un Oscar 🏆",
+                    "Mejor que un helado en un día caluroso 🍦",
+                    "Más brillante que las estrellas 🌟",
+                    "Imparable como un tren bala 🚄",
+                    "Con más energía que un grupo de rockeros 🎸"
+                ]
+            },
+            {
+                pregunta: "¿Qué tal tu mañana? 🌞",
+                respuestas: [
+                    "Desayuné motivación con un café extra fuerte ☕",
+                    "Como si tuviera superpoderes secretos 💪",
+                    "Más despierto que un Pokemon en batalla 🐾",
+                    "Con la creatividad a tope 🎨",
+                    "Listo para conquistar el mundo 🌍",
+                    "Tan inspirado como un meme viral 🚀",
+                    "Con más chispa que un encendedor nuevo 🔥"
+                ]
+            }
+        ];
+
+        function mostrarFraseDelDia() {
+            const infoDiv = document.getElementById('info');
+            const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+            const contenido = `<h2 class="text-lg font-bold mb-2">Frase del Día</h2><p>${fraseAleatoria}</p>`;
+            infoDiv.innerHTML = contenido;
+            infoDiv.classList.remove('hidden');
+        }
+
+        function mostrarJuegoDeVocabulario() {
+            const infoDiv = document.getElementById('info');
+            const palabrasJuego = [
+                { palabra: "manzana", emoji: "🍎", pista: "Fruta roja y redonda" },
+                { palabra: "sol", emoji: "☀️", pista: "Astro que nos da luz y calor" },
+                { palabra: "cielo", emoji: "🌤️", pista: "Espacio azul sobre nosotros" },
+                { palabra: "árbol", emoji: "🌳", pista: "Planta grande con ramas" },
+                { palabra: "libro", emoji: "📖", pista: "Objeto para leer" },
+                { palabra: "casa", emoji: "🏠", pista: "Lugar donde vivimos" },
+                { palabra: "puerta", emoji: "🚪", pista: "Entrada a un espacio" },
+                { palabra: "luz", emoji: "💡", pista: "Claridad que ilumina" }
+            ];
+
+            const objetoCorrecta = palabrasJuego[Math.floor(Math.random() * palabrasJuego.length)];
+            const palabraCorrecta = objetoCorrecta.palabra;
+
+            let opciones = palabrasJuego
+                .sort(() => Math.random() - 0.5) // Mezclar palabras
+                .map(item => `<div class='juego-opcion' onclick='verificarRespuesta("${item.palabra}", "${palabraCorrecta}", "${objetoCorrecta.emoji}")'>${item.palabra}</div>`)
+                .join('');
+
+            const contenido = `<h2 class="text-lg font-bold mb-2">Juego de Vocabulario</h2>` +
+                              `<p>¿Qué palabra representa este emoji? <strong>${objetoCorrecta.emoji}</strong></p>` +
+                              `<p class="text-sm text-gray-600 mb-2">Pista: ${objetoCorrecta.pista}</p>` +
+                              `<div>${opciones}</div>`;
+
+            infoDiv.innerHTML = contenido;
+            infoDiv.classList.remove('hidden');
+        }
+
+        function verificarRespuesta(seleccion, correcta, emoji) {
+            const infoDiv = document.getElementById('info');
+            const mensaje = seleccion === correcta ? 
+                `<p class='text-green-600'>¡Correcto! ${emoji} "${correcta}" es la respuesta.</p>` : 
+                `<p class='text-red-600'>Incorrecto. La palabra para ${emoji} era "${correcta}".</p>`;
+
+            infoDiv.innerHTML += mensaje;
+        }
+
+        function mostrarPracticaDeConversacion() {
+            const infoDiv = document.getElementById('info');
+
+            if (Math.random() > 0.5) {
+                const conversacionAleatoria = preguntasConversacion[Math.floor(Math.random() * preguntasConversacion.length)];
+                const pregunta = conversacionAleatoria.pregunta;
+                const respuestas = conversacionAleatoria.respuestas;
+
+                let opciones = respuestas
+                    .map(respuesta => `<div class='respuesta-opcion' onclick='mostrarRespuestaConversacion("${respuesta}")'>${respuesta}</div>`)
+                    .join('');
+
+                const contenido = `<h2 class="text-lg font-bold mb-2">Práctica de Conversación</h2>` +
+                                  `<p><strong>Pregunta:</strong> ${pregunta}</p>` +
+                                  `<div>${opciones}</div>` +
+                                  `<a href="https://www.rae.es" target="_blank" class="text-blue-600 underline mt-4 block">Visitar RAE 🇪🇸</a>`;
+
+                infoDiv.innerHTML = contenido;
+            } else {
+                const videoAleatorio = videos[Math.floor(Math.random() * videos.length)];
+                const contenido = `<h2 class="text-lg font-bold mb-2">Práctica con Video</h2>` +
+                                  `<iframe src="${videoAleatorio}" allowfullscreen></iframe>` +
+                                  `<a href="https://www.rae.es" target="_blank" class="text-blue-600 underline mt-4 block">Visitar RAE 🇪🇸</a>`;
+
+                infoDiv.innerHTML = contenido;
+            }
+
+            infoDiv.classList.remove('hidden');
+        }
+
+        function mostrarRespuestaConversacion(respuesta) {
+            const infoDiv = document.getElementById('info');
+            const mensaje = `<p class='mt-4 text-blue-600'><strong>Tu respuesta:</strong> ${respuesta}</p>`;
+
+            infoDiv.innerHTML += mensaje;
+        }
+    </script>
+</body>
+</html>
